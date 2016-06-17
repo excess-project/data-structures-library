@@ -1,36 +1,40 @@
-EXCESS data structures framework
+EXCESS C++ data structures library
 
  Copyright (C) 2014 - 2016  Anders Gidenstam
- Copyright (C) 2011  Håkan Sundell    (Skeleton for the experiment framework)
 
- License: GPL v3+ except for src/include/* which is LGPL v3+.
+ License: LGPL v3+.
 
-LICENSES OF DEPENDENCIES
-------------------------
+LICENSES OF OPTIONAL DEPENDENCIES
+---------------------------------
 
-The following applies, to the best of my knowledge, when the respective
-dependency is compiled in:
+The following applies, to the best of my knowledge, when this library + the
+respective optional dependency is compiled in into a binary/executable program:
 
 NOBLE
   Copyright (C) Parallel Scalable Solutions AB, http://www.non-blocking.com
   All Rights Reserved.
   A binary including it may not be distributed.
+  Contact Parallel Scalable Solutions AB to find a solution for your case.
 
 Intel Threading Building Blocks:
   Copyright 2005-2014 Intel Corporation.  All Rights Reserved.
   GPL v2 or later with the "runtime exception".
-  A binary including it may be distributed under GPL v3+.
+  A binary including it may be distributed in accordance with the licenses.
 
 EXCESS Tree library
   Composite collection of concurrent search tree implementations.
   For DeltaTree and GreenBST:
     Copyright (C) 2013 - 2016, Ibrahim Umar.
     The Apache License, Version 2.0.
-    A binary including these may be distributed under GPL v3+.
+    A binary including these may be distributed in accordance with the licenses.
   For CBTree:
     Copyright (C) 2013 - 2016, Ibrahim Umar.
     Copyright (C) 2010  Amittai Aviram.
     GPL v3+.
+    A binary including it may be distributed in accordance with the GPL v3+.
+
+The following dependencies are research prototypes and may not be suitable
+for non-experimental use:
 
 CCKHashtable
   Copyright (C) 2014, Nhan Nguyen and Philippas Tsigas. All Rights Reserved.
@@ -46,39 +50,24 @@ HSHashtable
   The software is provided "as is". There is no warranty of any kind.
 
   The ChainedHashMap is GPL v2 or later.
-  A binary including it may be distributed under GPL v3+.
+  A binary including it may be distributed under GPL v2+.
 
-EXCESS Monitoring Framework client/agent
-  Copyright 2014, 2015, High Performance Computing Center, Stuttgart
-  The Apache License, Version 2.0.
-  A binary including it may be distributed under GPL v3+.
-
-OpenBLAS (See the LICENSE file in the OpenBLAS source archive)
-  Copyright (c) 2011-2014, The OpenBLAS Project. All rights reserved.
-  A binary including it may be distributed under GPL v3+ provided the above
-  copyright statement is included.
-
-librsb
-  Copyright (C) Michele Martone.
-  LGPL v3.
-  A binary including it may be distributed under GPL v3+.
 
 INSTALL
 -------
 
-1. Configure the dependencies in the top-level Makefile.
+1. Configure the install prefix in the top-level Makefile.
 
-2. make.
+2. make install
 
-3. Run
-   ./testbench -e 0 -h
-   ./testbench -e 1 -h
-   ./testbench -e 2 -h
-   ./testbench -e 3 -h
-   ./testbench -e 4 -h
-   ./testbench -e 5 -h
+See the Makefile and the examples directory for examples of how to setup the
+macros and compiler flags needed for building an application that includes the
+data structures library and its dependencies.
 
-4. The matrices needed for the -e 3 SpGEMM microbenchmark can be
-   downloaded from http://yifanhu.net/GALLERY/GRAPHS/search.html
-   in Matrix Market format using the same name as listed by the program.
-   They should be placed in the subdirectory matrices/general/
+To compile the test program in the examples directory:
+
+Without optional dependencies:
+$ g++ -o queue_test -fopenmp -DUSE_OPENMP -I /opt/EXCESS/include/ dsl-test.cpp
+
+With Intel TBB support enabled:
+$ g++ -o queue_test -fopenmp -DUSE_OPENMP -DUSE_TBB -I /opt/EXCESS/include/ -ltbb  dsl-test.cpp

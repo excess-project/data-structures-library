@@ -2,3 +2,4 @@
 *.err
 *.out
 job.*
+examples/queue_test
