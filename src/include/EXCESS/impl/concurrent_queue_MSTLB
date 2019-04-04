@@ -110,7 +110,7 @@ public:
     : public concurrent_queue<T>::handle
   {
   private:
-    friend concurrent_queue_MSTLB;
+    friend class concurrent_queue_MSTLB;
     concurrent_queue_MSTLB<T>* queue;
 
     handle(concurrent_queue_MSTLB<T>* queue)
